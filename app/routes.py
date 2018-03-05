@@ -30,12 +30,13 @@ def login():
     return render_template("login.html", title="Sign In", form=form)
 
 
-@app.route("/register", methods=["GET", "POST"])
 @app.route("/sign-up", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash("Registration successful for user {}.".format(
+        flash("Registration successful for user {}".format(
             form.username.data))
-        return redirect(url_for('index'))
+        flash("Login using your credentials below")
+        return redirect(url_for('login'))
     return render_template("register.html", title="Register", form=form)

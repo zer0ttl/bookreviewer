@@ -11,8 +11,16 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        <p>
             {{ form.last_name.label }}<br>
             {{ form.last_name(size=32) }}<br>
+            {% for error in form.last_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email_address.label }}<br>
+            {{ form.email_address(size=32) }}<br>
             {% for error in form.last_name.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -38,6 +46,7 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        <p>{{ form.agree_terms_and_conditions() }} {{ form.agree_terms_and_conditions.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
 {% endblock content %}
