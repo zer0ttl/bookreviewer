@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for
-from app import app
+from app import app, db
 from app.forms import LoginForm, RegistrationForm
+from app.models import User
 
 
 @app.route("/")
@@ -35,6 +36,13 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        user = User(first_name=form.first_name.data,
+                    last_name=form.last_name.data,
+                    email=form.email.data,
+                    username=form.username.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
         flash("Registration successful for user {}".format(
             form.username.data))
         flash("Login using your credentials below")
